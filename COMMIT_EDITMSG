@@ -1,0 +1,10 @@
+Initial commit: Insurance Knowledge Tool
+
+- 641 glossary terms covering insurance concepts, coverage types,
+  risk management, loss control, trucking safety, logging/forestry,
+  regulatory framework, and contract risk transfer
+- 914 reference cards organized by topic
+- Single-file HTML app — no install, works offline
+- Responsive layout (mobile, tablet, desktop)
+- Real-time search with keyboard shortcuts
+- Built for the Swamp Fox Insurance Agency team
