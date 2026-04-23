@@ -36,7 +36,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+/* Native smooth scroll disabled — handled via custom eased JS scroll for a softer, slower feel */
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -396,6 +397,154 @@ body.has-query .search-kbd { display: none; }
   line-height: 1.55;
 }
 .card-body li::marker { color: var(--brand-green); }
+.card-body strong { color: var(--brand-green-dark); font-weight: 600; }
+.card-body em { color: var(--ink); font-style: italic; }
+.card-body kbd {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.08rem 0.4rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  color: var(--brand-green-dark);
+  display: inline-block;
+  line-height: 1.2;
+}
+
+/* =================== LANDING HERO =================== */
+.hero {
+  position: relative;
+  padding: 2.75rem clamp(1.25rem, 3vw, 2.75rem) 2.5rem;
+  margin: 0 0 2.5rem 0;
+  background:
+    radial-gradient(ellipse at top right, rgba(201, 169, 97, 0.14), transparent 60%),
+    linear-gradient(135deg, var(--brand-green-dark) 0%, var(--brand-green) 65%, var(--brand-green-deep) 100%);
+  color: var(--cream);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -20px rgba(19, 48, 48, 0.5);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 120%, rgba(232, 155, 139, 0.15), transparent 45%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.85rem 0;
+  font-weight: 500;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem 0;
+  color: var(--cream);
+  max-width: 32ch;
+}
+.hero-sub {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  margin: 0 0 1.5rem 0;
+  color: rgba(245, 241, 232, 0.88);
+  max-width: 62ch;
+}
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  position: relative;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.68rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+}
+.hero-cta.primary {
+  background: var(--gold);
+  color: var(--brand-green-deep);
+  border: 1px solid var(--gold);
+}
+.hero-cta.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -8px rgba(201, 169, 97, 0.5);
+  background: #d8b972;
+}
+.hero-cta.ghost {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(245, 241, 232, 0.35);
+}
+.hero-cta.ghost:hover {
+  background: rgba(245, 241, 232, 0.1);
+  border-color: var(--cream);
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem 2rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(245, 241, 232, 0.18);
+  position: relative;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.55rem;
+  color: var(--cream);
+  line-height: 1.1;
+}
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(201, 169, 97, 0.95);
+  margin-top: 0.15rem;
+}
+body.searching .hero { display: none; }
+
+/* =================== PLAYBOOKS =================== */
+.playbook-header .topic-title::before {
+  content: "Playbook";
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(200, 85, 61, 0.08);
+  padding: 0.25rem 0.55rem;
+  border-radius: 3px;
+  margin-right: 0.7rem;
+  vertical-align: middle;
+  font-weight: 600;
+  transform: translateY(-0.2em);
+}
+.playbook .card {
+  background: linear-gradient(to bottom, var(--paper) 0%, #FAF6EC 100%);
+  border-color: var(--line);
+}
+.playbook .card-title {
+  color: var(--brand-green-dark);
+}
 
 /* =================== GLOSSARY =================== */
 .glossary-header { border-bottom: 2px solid var(--brand-green); }
@@ -429,48 +578,82 @@ body.has-query .search-kbd { display: none; }
   border-color: var(--brand-green);
 }
 
-/* Multi-column glossary on wide screens */
-.glossary-body {
-  column-gap: 2.25rem;
-  columns: 1;
-}
-@media (min-width: 1100px) {
-  .glossary-body { columns: 2; }
-}
-@media (min-width: 1700px) {
-  .glossary-body { columns: 3; }
-}
-/* Prevent column breaks inside entries */
-.az-group, .term-entry {
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
+/* Glossary layout: letters stacked vertically; terms flow in a responsive grid inside each letter */
+.glossary-body { display: block; }
 
 .az-group {
-  margin-bottom: 1.75rem;
-  scroll-margin-top: calc(var(--header-h) + 0.5rem);
+  margin: 0 0 2.75rem 0;
+  scroll-margin-top: calc(var(--header-h) + 0.75rem);
+  padding-top: 0.25rem;
 }
+.az-group + .az-group {
+  border-top: 1px dashed var(--line);
+  padding-top: 1.5rem;
+}
+
+/* Large letter divider with a subtle gradient rule */
 .az-letter {
+  position: sticky;
+  top: calc(var(--header-h) + 2px);
+  z-index: 5;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: var(--brand-green);
-  border-bottom: 1px solid var(--line-mist);
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.9rem;
+  padding: 0.5rem 0.1rem 0.55rem;
+  margin: 0 0 1.1rem 0;
   line-height: 1;
+  letter-spacing: -0.01em;
+  background: linear-gradient(to bottom, var(--paper) 85%, rgba(253,251,246,0));
 }
-.term-list { margin: 0; padding: 0; }
+.az-letter::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--line-mist), transparent);
+  transform: translateY(-0.4em);
+}
+.az-letter .az-count {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  transform: translateY(-0.55em);
+}
+
+/* Horizontal grid of term cards within each letter */
+.term-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem 1.1rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+@media (min-width: 1700px) {
+  .term-list { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+}
+
 .term-entry {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid var(--line);
+  padding: 0.75rem 0.9rem 0.8rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px;
   scroll-margin-top: calc(var(--header-h) + 1rem);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
-.term-entry:last-child { border-bottom: none; }
+.term-entry:hover {
+  border-color: var(--brand-green);
+  box-shadow: 0 4px 14px -10px rgba(44, 95, 93, 0.35);
+  transform: translateY(-1px);
+}
 .term-entry.hidden { display: none; }
 .term-entry.match-highlight {
   background: #FFF5E8;
-  padding-left: 0.75rem;
   border-left: 3px solid var(--accent);
   animation: flash 2.5s ease-out;
 }
@@ -483,10 +666,12 @@ body.has-query .search-kbd { display: none; }
 }
 .term-def {
   margin: 0;
+  margin-inline-start: 0;
   font-size: 0.92rem;
   color: var(--ink-soft);
   line-height: 1.55;
 }
+.term-entry dt, .term-entry dd { display: block; }
 
 /* =================== HIGHLIGHT =================== */
 mark.hl {
@@ -507,8 +692,17 @@ body.searching .glossary-section > .topic-header {
 }
 body.searching .glossary-section .topic-sub,
 body.searching .glossary-section .az-bar { display: none; }
-body.searching .glossary-body { columns: 1; }
-body.searching .glossary-section .az-letter { font-size: 1.25rem; }
+body.searching .glossary-section .az-letter {
+  font-size: 1.2rem;
+  position: static;
+  background: transparent;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+body.searching .glossary-section .az-letter::after { display: none; }
+body.searching .glossary-section .az-letter .az-count { display: none; }
+body.searching .az-group { margin-bottom: 1.25rem; padding-top: 0; }
+body.searching .az-group + .az-group { border-top: none; padding-top: 0; }
 body.searching .topic { margin-bottom: 1rem; }
 body.searching .section-divider { display: none; }
 body.searching .topic.empty-topic,
@@ -584,6 +778,11 @@ body.no-results .empty-state { display: block; }
   <aside class="sidebar">
     <h2 class="toc-label">Contents</h2>
     <ul class="toc-list">
+<li class="toc-section-title">Agency Playbooks</li>
+<li><a class="toc-item" href="#home" data-topic="home"><span class="toc-topic">Overview &amp; Start Here</span></a></li>
+<li><a class="toc-item" href="#playbook-daily" data-topic="playbook-daily"><span class="toc-topic">Daily Reference</span></a></li>
+<li><a class="toc-item" href="#playbook-am" data-topic="playbook-am"><span class="toc-topic">Account Manager</span></a></li>
+<li><a class="toc-item" href="#playbook-losscontrol" data-topic="playbook-losscontrol"><span class="toc-topic">Loss Control</span></a></li>
 <li class="toc-section-title">Glossary</li>
 <li><a class="toc-item" href="#glossary" data-topic="glossary"><span class="toc-topic">Insurance Terms A–Z</span></a></li>
 <li class="toc-section-title">Risk Management</li>
@@ -623,6 +822,343 @@ body.no-results .empty-state { display: block; }
       <h3>No matches found</h3>
       <p>Try a different word, a shorter term, or clear the search to browse everything.</p>
     </div>
+
+<section class="topic" id="home" data-topic="home">
+  <div class="hero">
+    <p class="hero-eyebrow">Swamp Fox Insurance Agency · Knowledge Base</p>
+    <h1 class="hero-title">Everything our team needs — in one place.</h1>
+    <p class="hero-sub">Daily reference material, account-manager workflows, loss-control playbooks, and a 641-term glossary. Built for producers, account managers, and CSRs who need answers fast — not a manual to read.</p>
+    <div class="hero-cta-row">
+      <a class="hero-cta primary" href="#playbook-daily">Open Daily Reference →</a>
+      <a class="hero-cta ghost" href="#glossary">Browse the Glossary</a>
+      <a class="hero-cta ghost" href="#topic-1">Study Topics</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">641</div>
+        <div class="hero-stat-label">Glossary Terms</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">24</div>
+        <div class="hero-stat-label">Study Topics</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Agency Playbooks</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">/ or ⌘K</div>
+        <div class="hero-stat-label">Search Shortcut</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><span>Agency Playbooks</span></div>
+
+<section class="topic playbook" id="playbook-daily" data-topic="playbook-daily">
+  <header class="topic-header playbook-header">
+    <h2 class="topic-title">Daily Reference</h2>
+    <p class="topic-sub">Fast answers to the questions that come up every day — effective dates, endorsements, certificates, binders, and the small stuff that slows a file down.</p>
+  </header>
+  <div class="card-grid">
+
+    <article class="card" id="card-pb-d1" data-search="effective date rules binder policy coverage begins 12:01 am local time inception" data-topic="playbook-daily">
+      <h3 class="card-title">Effective Dates — The 12:01 Rule</h3>
+      <ul class="card-body">
+        <li>Standard policies incept at <strong>12:01 AM</strong> local time at the insured's address — not noon, not midnight.</li>
+        <li>Binders follow the same rule unless the carrier specifies otherwise in writing.</li>
+        <li>For same-day bind requests, document time of bind — some carriers will not back-date within the same day without underwriter approval.</li>
+        <li>Always match the renewal effective date to the expiring policy to avoid coverage gaps.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d2" data-search="binder vs policy evidence of coverage acord 75" data-topic="playbook-daily">
+      <h3 class="card-title">Binder vs. Policy vs. Evidence</h3>
+      <ul class="card-body">
+        <li><strong>Binder (ACORD 75):</strong> temporary written proof of coverage pending policy issuance. Typically 30–90 days.</li>
+        <li><strong>Policy:</strong> the actual contract. Controls coverage once issued, even retroactively to the effective date.</li>
+        <li><strong>Evidence of Property Insurance (ACORD 27/28):</strong> proof provided to a lender — not a contract.</li>
+        <li><strong>Certificate of Insurance (ACORD 25):</strong> proof to a third party — confers no rights, amends nothing.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d3" data-search="acord forms quick reference 25 125 126 140" data-topic="playbook-daily">
+      <h3 class="card-title">ACORD Forms — Quick Reference</h3>
+      <ul class="card-body">
+        <li><strong>25</strong> — Certificate of Liability Insurance</li>
+        <li><strong>27 / 28</strong> — Evidence of Property Insurance (personal / commercial)</li>
+        <li><strong>75</strong> — Insurance Binder</li>
+        <li><strong>125</strong> — Commercial Insurance Application (common parts)</li>
+        <li><strong>126</strong> — Commercial General Liability supplemental</li>
+        <li><strong>130</strong> — Workers Compensation supplemental</li>
+        <li><strong>140</strong> — Property Section</li>
+        <li><strong>175</strong> — Loss Summary (5-year)</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d4" data-search="certificate of insurance coi common mistakes additional insured waiver of subrogation" data-topic="playbook-daily">
+      <h3 class="card-title">COI Issuance — Avoid These 5 Mistakes</h3>
+      <ul class="card-body">
+        <li>Adding "Additional Insured" wording on the cert without an underlying endorsement on the policy — the cert alone confers nothing.</li>
+        <li>Naming the wrong entity — match the contract language exactly (LLC vs. Inc. vs. d/b/a).</li>
+        <li>Listing coverages or limits the policy does not actually provide.</li>
+        <li>Leaving "Description of Operations" blank when the contract requires project-specific wording.</li>
+        <li>Issuing a cert for a policy that is not yet bound — always verify with the carrier or the binder first.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d5" data-search="endorsement request backdating cancellation policy change" data-topic="playbook-daily">
+      <h3 class="card-title">Endorsement Requests — Do's &amp; Don'ts</h3>
+      <ul class="card-body">
+        <li>Submit in writing — email with the policy number, effective date of change, and requested change. Phone-only requests create E&amp;O exposure.</li>
+        <li>Confirm pro-rata vs. short-rate billing implications before submitting.</li>
+        <li>Back-dating beyond 30 days usually requires underwriter approval and a no-loss letter.</li>
+        <li>Follow up in 5 business days if the endorsement has not been issued.</li>
+        <li>Never tell an insured a change is "in effect" until you have written confirmation.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d6" data-search="named insured dba additional insured entity" data-topic="playbook-daily">
+      <h3 class="card-title">Named Insured — Get It Right the First Time</h3>
+      <ul class="card-body">
+        <li>Pull the entity name from the state's Secretary of State database, not from the client's letterhead.</li>
+        <li>Include all operating entities, d/b/a names, and subsidiaries the insured wants covered.</li>
+        <li>Mismatched entity names are one of the most common causes of claim denials.</li>
+        <li>When in doubt, attach a Named Insured endorsement listing each entity separately.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d7" data-search="cancellation notice requirements pro rata short rate" data-topic="playbook-daily">
+      <h3 class="card-title">Cancellation — Notice Requirements</h3>
+      <ul class="card-body">
+        <li>Mid-term insured-requested cancellation: typically <strong>short-rate</strong> return premium.</li>
+        <li>Carrier-initiated cancellation: typically <strong>pro-rata</strong> and requires statutory notice (usually 10 days for non-pay, 30–60 days for other reasons — state-specific).</li>
+        <li>Flat cancellation (back to inception) generally requires proof no coverage was in force and another policy was effective the whole time.</li>
+        <li>Always collect a signed Lost Policy Release (LPR) or cancellation request — no verbal cancellations.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d8" data-search="state filing deadlines surplus lines tax diligent search" data-topic="playbook-daily">
+      <h3 class="card-title">Surplus Lines Basics</h3>
+      <ul class="card-body">
+        <li>Placed with a non-admitted carrier — <strong>not</strong> backed by the state guaranty fund.</li>
+        <li>Requires a Diligent Search (typically 3+ admitted declinations) documented before placement.</li>
+        <li>Surplus lines tax and stamping fees vary by state — confirm rates before quoting.</li>
+        <li>Filings are the broker's responsibility and usually due 30–60 days after the effective date.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-d9" data-search="search shortcut keyboard navigation slash cmd k" data-topic="playbook-daily">
+      <h3 class="card-title">This Tool — Search Shortcuts</h3>
+      <ul class="card-body">
+        <li>Press <kbd>/</kbd> to jump to search from anywhere.</li>
+        <li>Press <kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>⌘</kbd>+<kbd>K</kbd> as an alternate shortcut.</li>
+        <li>Press <kbd>Esc</kbd> to clear the search and return to browsing.</li>
+        <li>Click any A–Z letter to glide to that section of the glossary.</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<section class="topic playbook" id="playbook-am" data-topic="playbook-am">
+  <header class="topic-header playbook-header">
+    <h2 class="topic-title">Account Manager</h2>
+    <p class="topic-sub">The renewal pipeline, re-marketing triggers, audit handling, and the client-touch cadence that keeps accounts from leaking out the back door.</p>
+  </header>
+  <div class="card-grid">
+
+    <article class="card" id="card-pb-a1" data-search="renewal timeline 120 90 60 30 day" data-topic="playbook-am">
+      <h3 class="card-title">The 120/90/60/30 Renewal Timeline</h3>
+      <ul class="card-body">
+        <li><strong>120 days out:</strong> Pull loss runs, exposure updates, and review the prior-year claims. Flag re-market candidates.</li>
+        <li><strong>90 days out:</strong> Submit to incumbent for renewal quote. Begin market outreach if re-marketing.</li>
+        <li><strong>60 days out:</strong> Collect renewal terms and alternate quotes. Prepare the renewal proposal.</li>
+        <li><strong>30 days out:</strong> Present to the client, secure signed applications and binder authorization.</li>
+        <li><strong>At renewal:</strong> Bind, issue certs, invoice, and schedule the next touch point.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a2" data-search="remarket trigger rate increase loss ratio carrier appetite" data-topic="playbook-am">
+      <h3 class="card-title">When to Re-Market</h3>
+      <ul class="card-body">
+        <li>Incumbent indication is <strong>&gt;15%</strong> over prior premium without corresponding exposure change.</li>
+        <li>Carrier has exited the class or non-renewed the account.</li>
+        <li>Loss ratio exceeded 60% and incumbent loaded the rate heavily — another carrier may have better appetite.</li>
+        <li>Client requested competitive options (document it).</li>
+        <li>Significant change in exposure, operations, or ownership that makes a new placement logical.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a3" data-search="submission packet carrier underwriting" data-topic="playbook-am">
+      <h3 class="card-title">A Clean Submission Packet</h3>
+      <ul class="card-body">
+        <li>Completed, signed ACORD applications (125 + supplementals).</li>
+        <li>5 years of carrier-issued loss runs on carrier letterhead.</li>
+        <li>Current year financials (or last 2 years for accounts over $250K in premium).</li>
+        <li>Narrative: operations, risk-management practices, what changed since last year.</li>
+        <li>Schedules: locations, vehicles, employees by class code, scheduled equipment.</li>
+        <li>A brief cover email with subject-line format: <em>NEW SUBMISSION — [Insured] — [Effective Date]</em>.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a4" data-search="audit workers comp general liability premium audit dispute" data-topic="playbook-am">
+      <h3 class="card-title">Premium Audits — Handling the Dispute</h3>
+      <ul class="card-body">
+        <li>Review the audit worksheet against the insured's payroll summary or sales report <strong>before</strong> the billing is finalized.</li>
+        <li>Watch for owner/officer payroll caps, subcontractor costs, and overtime exclusions being applied correctly.</li>
+        <li>File a formal audit dispute within the carrier's window (often 60 days from invoice) with supporting documentation.</li>
+        <li>If the dispute is complex, request a physical re-audit rather than a desk audit.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a5" data-search="claim reporting first notice of loss fnol insured" data-topic="playbook-am">
+      <h3 class="card-title">First Notice of Loss — Checklist</h3>
+      <ul class="card-body">
+        <li>Get the facts in writing: date, time, location, parties involved, description, injuries, property damage, witnesses.</li>
+        <li>Report to the carrier immediately — most policies require "prompt" notice; delays can void coverage.</li>
+        <li>Never speculate on coverage or liability to the insured. Report the facts; let the adjuster determine coverage.</li>
+        <li>Document the FNOL in the management system and send a confirmation to the insured with the claim number.</li>
+        <li>Follow up at 7, 30, and 60 days until the claim closes.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a6" data-search="client touch cadence retention account review" data-topic="playbook-am">
+      <h3 class="card-title">Client Touch Cadence</h3>
+      <ul class="card-body">
+        <li><strong>Quarterly:</strong> short check-in call or email — any operational changes?</li>
+        <li><strong>Mid-year:</strong> Mid-term account review (exposures, claims trend, any upcoming projects).</li>
+        <li><strong>60 days pre-renewal:</strong> formal renewal meeting.</li>
+        <li><strong>After every claim:</strong> post-claim follow-up once resolved.</li>
+        <li><strong>Always:</strong> a same-day response to any inbound client request — even if it's just "received, working on it."</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a7" data-search="non renewal cancellation response lost account" data-topic="playbook-am">
+      <h3 class="card-title">When a Carrier Non-Renews</h3>
+      <ul class="card-body">
+        <li>Notify the client immediately — never let them learn from the carrier's notice first.</li>
+        <li>Document the reason in writing from the underwriter if possible.</li>
+        <li>Start re-marketing with at least 60 days of runway; some markets require 45+ days to quote new business.</li>
+        <li>If the account was lost due to claims, prepare a loss-summary narrative explaining remediation steps taken.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-a8" data-search="coverage review exposure base gap analysis" data-topic="playbook-am">
+      <h3 class="card-title">Annual Coverage Review — The Gap Checklist</h3>
+      <ul class="card-body">
+        <li>Cyber liability — often missing on accounts under $5M revenue.</li>
+        <li>Employment Practices Liability (EPLI) — any account with employees should consider it.</li>
+        <li>Umbrella/excess — are limits keeping up with client revenue and contract requirements?</li>
+        <li>Hired &amp; Non-Owned auto — often overlooked on service businesses.</li>
+        <li>Equipment Breakdown / Mechanical — critical for manufacturing, HVAC, restaurants.</li>
+        <li>Business Income — does the period of restoration match real rebuild timelines?</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<section class="topic playbook" id="playbook-losscontrol" data-topic="playbook-losscontrol">
+  <header class="topic-header playbook-header">
+    <h2 class="topic-title">Loss Control</h2>
+    <p class="topic-sub">Pre-loss controls that lower rates, reduce frequency, and make inspections go smoothly. Use these when preparing accounts for underwriter surveys and client risk reviews.</p>
+  </header>
+  <div class="card-grid">
+
+    <article class="card" id="card-pb-l1" data-search="property loss control fire sprinkler alarm central station credit" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Property — The Big Four Credits</h3>
+      <ul class="card-body">
+        <li><strong>Automatic sprinklers</strong> — often the single largest property credit; verify NFPA 25 inspection reports are current.</li>
+        <li><strong>Central-station fire alarm</strong> — must be UL-listed and tested annually. Local-only alarms get a much smaller credit.</li>
+        <li><strong>Central-station burglar alarm</strong> — with line security &amp; entry/motion contacts.</li>
+        <li><strong>Updated building systems</strong> — roof, electrical, plumbing, HVAC age matters; provide dates of last replacement.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l2" data-search="workers compensation loss control return to work safety committee" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Workers Comp — Frequency Drivers</h3>
+      <ul class="card-body">
+        <li><strong>Return-to-Work program:</strong> written, signed by management, with modified-duty job descriptions. Reduces indemnity days dramatically.</li>
+        <li><strong>Safety committee:</strong> meets monthly, minutes documented, recommendations tracked to completion.</li>
+        <li><strong>Post-offer physicals</strong> for physically demanding roles — reduces strain/sprain claims.</li>
+        <li><strong>New-hire orientation</strong> covering job-specific hazards, PPE, and reporting procedures.</li>
+        <li>Monitor the Experience Mod annually — identify the two or three large losses driving it and document remediation.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l3" data-search="fleet auto loss control mvr gps telematics driver training" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Fleet &amp; Commercial Auto Controls</h3>
+      <ul class="card-body">
+        <li><strong>MVR reviews</strong> at hire and annually — written standards for what disqualifies a driver.</li>
+        <li><strong>Telematics / GPS</strong> — hard-braking, speeding, and idling alerts. Document coaching on flagged events.</li>
+        <li><strong>Pre-trip inspections</strong> and a written maintenance program on a fixed schedule.</li>
+        <li><strong>Drug &amp; alcohol testing</strong> program — pre-employment, random, post-accident, reasonable suspicion.</li>
+        <li><strong>Accident kit</strong> in every vehicle: contact info, photo card, witness form, FNOL instructions.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l4" data-search="general liability loss control slip fall premises" data-topic="playbook-losscontrol">
+      <h3 class="card-title">General Liability — Premises Controls</h3>
+      <ul class="card-body">
+        <li>Documented inspection logs for floors, stairs, parking lots (especially ice/snow in winter).</li>
+        <li>Written contractor-screening process: COI review, additional-insured status, hold-harmless wording.</li>
+        <li>Security camera coverage at all public entry points with minimum 30-day retention.</li>
+        <li>Incident-report form used every time — even for "no injury" near misses.</li>
+        <li>Social host / alcohol policy in writing for businesses that serve.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l5" data-search="osha recordkeeping 300 log reporting" data-topic="playbook-losscontrol">
+      <h3 class="card-title">OSHA — Recordkeeping Basics</h3>
+      <ul class="card-body">
+        <li>Employers with &gt;10 employees must maintain the <strong>OSHA 300 log</strong> (recordable injuries and illnesses).</li>
+        <li>Annual summary (Form 300A) posted Feb 1 – Apr 30 each year.</li>
+        <li>Fatalities reported within <strong>8 hours</strong>; in-patient hospitalizations, amputations, eye loss within <strong>24 hours</strong>.</li>
+        <li>Written IIPP (Injury &amp; Illness Prevention Program) required in many states — CA, WA, HI, OR, among others.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l6" data-search="contractor certificate hold harmless indemnity risk transfer" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Risk Transfer — Contracts That Actually Transfer Risk</h3>
+      <ul class="card-body">
+        <li>Written contract with <strong>indemnification &amp; hold-harmless</strong> language favoring the insured.</li>
+        <li>Requirement to name the insured as <strong>Additional Insured on a primary &amp; non-contributory basis</strong>.</li>
+        <li>Waiver of Subrogation in favor of the insured.</li>
+        <li>Minimum limits and minimum AM Best ratings spelled out (commonly A- VII or better).</li>
+        <li>Collect and review the COI <strong>before</strong> work begins — and reject non-conforming certs on the spot.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l7" data-search="cyber loss control mfa backups phishing training" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Cyber — Controls Underwriters Demand</h3>
+      <ul class="card-body">
+        <li><strong>MFA</strong> on email, VPN, remote access, and all privileged accounts (no exceptions).</li>
+        <li><strong>Endpoint Detection &amp; Response (EDR)</strong> — not just anti-virus — deployed fleet-wide.</li>
+        <li><strong>Offline, immutable backups</strong> tested quarterly.</li>
+        <li>Phishing training with quarterly simulated campaigns.</li>
+        <li>Privileged Access Management and a written Incident Response plan.</li>
+        <li>Without these, expect steep rate loads, high retentions, or outright declinations.</li>
+      </ul>
+    </article>
+
+    <article class="card" id="card-pb-l8" data-search="inspection preparation underwriter walkthrough survey" data-topic="playbook-losscontrol">
+      <h3 class="card-title">Preparing for an Underwriter Inspection</h3>
+      <ul class="card-body">
+        <li>Walk the property first — look for anything a photo would make the underwriter nervous (debris, blocked exits, extension cords, unguarded machinery).</li>
+        <li>Have documents ready: sprinkler/alarm inspection reports, OSHA logs, safety-committee minutes, training records.</li>
+        <li>Assign one point of contact at the client — the owner or safety director, not a random staff member.</li>
+        <li>Be present for the walkthrough when possible; you hear the recommendations in real time.</li>
+        <li>Respond to the loss-control recommendation letter in writing within the deadline — silence reads as refusal.</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<div class="section-divider"><span>Glossary</span></div>
+
 <section class="topic glossary-section" id="glossary" data-topic="glossary">
 <header class="topic-header glossary-header">
   <h2 class="topic-title">Insurance Terms — Glossary</h2>
@@ -10245,21 +10781,109 @@ body.no-results .empty-state { display: block; }
     if (SEARCH.value) { SEARCH.value = ''; runSearch(''); }
   }));
 
+  // ============== CUSTOM SMOOTH SCROLL ==============
+  // Replaces native 'smooth' behavior with a slower, gentler eased scroll.
+  // Duration scales with distance so short jumps feel quick, long jumps feel unhurried.
+  const headerH = () => {
+    const h = document.querySelector('.appbar');
+    return h ? h.offsetHeight : 92;
+  };
+  const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  let scrollAnim = null;
+  function smoothScrollTo(targetY, duration) {
+    if (scrollAnim) cancelAnimationFrame(scrollAnim);
+    const startY = window.scrollY;
+    const delta = targetY - startY;
+    if (Math.abs(delta) < 2) return;
+    const dist = Math.abs(delta);
+    // Base 650ms, grow up to 1300ms for long jumps — gentle but not sluggish.
+    const dur = duration || Math.min(1300, Math.max(650, 450 + dist * 0.35));
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const y = startY + delta * easeInOutCubic(t);
+      window.scrollTo(0, y);
+      if (t < 1) scrollAnim = requestAnimationFrame(step);
+      else scrollAnim = null;
+    }
+    scrollAnim = requestAnimationFrame(step);
+  }
+  function scrollToEl(el, extraOffset) {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const offset = headerH() + (extraOffset || 12);
+    const y = rect.top + window.scrollY - offset;
+    smoothScrollTo(y);
+  }
+  // Cancel animation on user wheel/touch so manual scroll isn't fighting the easing.
+  ['wheel', 'touchstart', 'keydown'].forEach(evt => {
+    window.addEventListener(evt, () => {
+      if (scrollAnim) { cancelAnimationFrame(scrollAnim); scrollAnim = null; }
+    }, { passive: true });
+  });
+
+  // Intercept A-Z letter clicks for eased scroll
+  document.querySelectorAll('.az-link').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      history.replaceState(null, '', href);
+      scrollToEl(el, 8);
+    });
+  });
+
+  // Intercept TOC + in-page anchor clicks for eased scroll.
+  // If a search is active, clear it synchronously *before* measuring the target
+  // so the DOM is settled when we compute the scroll position.
+  document.querySelectorAll('.toc-item, a[href^="#"]').forEach(link => {
+    if (link.classList.contains('az-link')) return;
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href') || '';
+      if (href === '#' || !href.startsWith('#')) return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      if (SEARCH.value) { SEARCH.value = ''; runSearch(''); }
+      history.replaceState(null, '', href);
+      // rAF so layout settles after any search reflow
+      requestAnimationFrame(() => scrollToEl(el, 16));
+    });
+  });
+
+  // Add term-count badges to each letter heading (A — 58 terms)
+  document.querySelectorAll('.az-group').forEach(g => {
+    const letter = g.querySelector('.az-letter');
+    if (!letter || letter.querySelector('.az-count')) return;
+    const n = g.querySelectorAll('.term-entry').length;
+    const span = document.createElement('span');
+    span.className = 'az-count';
+    span.textContent = n + (n === 1 ? ' term' : ' terms');
+    letter.appendChild(span);
+  });
+
   const topBtn = document.getElementById('top-btn');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 600) topBtn.classList.add('visible');
     else topBtn.classList.remove('visible');
   });
-  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  topBtn.addEventListener('click', () => smoothScrollTo(0));
 
   if (location.hash.startsWith('#card-') || location.hash.startsWith('#term-')) {
     setTimeout(() => {
       const el = document.querySelector(location.hash);
       if (el) {
-        el.scrollIntoView({behavior:'smooth', block:'center'});
+        scrollToEl(el, 100);
         el.classList.add('match-highlight');
         setTimeout(() => el.classList.remove('match-highlight'), 2800);
       }
+    }, 80);
+  } else if (location.hash.startsWith('#letter-') || location.hash.startsWith('#topic-')) {
+    setTimeout(() => {
+      const el = document.querySelector(location.hash);
+      if (el) scrollToEl(el, 12);
     }, 80);
   }
 })();
